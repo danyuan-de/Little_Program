@@ -47,10 +47,9 @@ class HeartAnimation:
         # Generate particles on the heart curve
         while theta < 2 * pi:
             i += 1
-            sigma = 0.15 if i % 5 else 0.3
-            # ----- stochastic shifting proportion for every particles -----
+            sigma = 0.15 if i % 20 else 0.3 # chnage the number of modulor (20 -> 5) -> there are more particles in the middle of heart
+            # stochastic shifting proportion for every particles 
             stochastic_pos = 1 - abs(random.gauss(1, sigma) - 1) 
-            # --------------------------------------------------------------
 
             # -------------------------------- heart curve --------------------------------
             x = 16 * pow(sin(theta), 3)
