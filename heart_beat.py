@@ -1,5 +1,4 @@
 import pygame, sys, random
-from pygame.locals import *
 from math import pi, sin, cos, pow
 
 WIDTH = 1000
@@ -26,7 +25,7 @@ class ParticlePrinciple:
         freq = 1 + (4 - 3 * self.offset) * sin(theta * 3.5)/10 # Increase heart beat frequency
         self.cur_pos = self.ori_pos[0] * freq * scale, self.ori_pos[1] * freq * scale
 
-# --------------------------------- change here ---------------------------------
+
 class HeartAnimation:
     def __init__(self) -> None:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -68,13 +67,6 @@ class HeartAnimation:
 
     def update_Ani(self, delta_time):
         self.elapsed += delta_time
-        # if self.status == 0:
-        #     # For the initial gathering effect, use a large multiplier L and gradually reduce it to normal value
-        #     self.L -= delta_time * 200
-        #     if self.L <= 10:
-        #         self.status = 1
-        #         self.L = 10
-
         # Update particle positions based on time
         for p in self.particles:
             p.update_pos(self.elapsed)
@@ -92,8 +84,8 @@ class HeartAnimation:
                         pygame.quit()
                         sys.exit()
 
-# -------------------------------------------------------------------------------
 
+# Main Function
 if __name__ == '__main__':
     pygame.init()
     heart_beat = HeartAnimation()
