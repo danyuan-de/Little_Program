@@ -13,12 +13,12 @@ class ParticlePrinciple:
         self.size = size
         self.offset = offset # random offset factor for the particle
 
-    def draw_particle(self, screen, L):
+    def draw_particle(self, screen):
         pos_x = 10 * self.offset * self.cur_pos[0] + 500
         pos_y = -10 * self.offset * self.cur_pos[1] + 400
         size_x = self.size[0]
         size_y = self.size[1]
-        pygame.draw.rect(screen, 'hot pink', (pos_x, pos_y, *self.size))
+        pygame.draw.rect(screen, 'hot pink', (pos_x, pos_y, size_x, size_y))
 
     def update_pos(self, theta):
         # can change the coefficient in "sin" (e.g. 3, 4, etc.) and denominator (e.g. 8, 10, 12, etc.)
@@ -48,8 +48,9 @@ class HeartAnimation:
         while theta < 2 * pi:
             i += 1
             sigma = 0.15 if i % 5 else 0.3
-            f = 1 - abs(random.gauss(1, sigma) - 1) # stochastic shifting proportion
-            offset = 1
+            # ----- stochastic shifting proportion for every particles -----
+            stochastic_pos = 1 - abs(random.gauss(1, sigma) - 1) 
+            # --------------------------------------------------------------
 
             # -------------------------------- heart curve --------------------------------
             x = 16 * pow(sin(theta), 3)
@@ -57,14 +58,14 @@ class HeartAnimation:
             # -----------------------------------------------------------------------------
             
             size = (random.uniform(0.5, 2.5), random.uniform(0.5, 2.5)) # randomly change the size of every particle
-            self.particles.append(ParticlePrinciple((x, y), size, offset))
+            self.particles.append(ParticlePrinciple((x, y), size, stochastic_pos))
             theta += delta_time
 
     def draw_Ani(self):
         self.screen.fill((0, 0, 0))
         # Draw the heart particles 
         for p in self.particles:
-            p.draw_particle(self.screen, self.L)
+            p.draw_particle(self.screen)
 
     def update_Ani(self, delta_time):
         self.elapsed += delta_time
