@@ -90,5 +90,3 @@ if __name__ == '__main__':
     pygame.init()
     heart_beat = HeartAnimation()
     heart_beat.run()
-
-    
