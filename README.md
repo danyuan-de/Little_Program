@@ -1,1 +1,1 @@
-Side-Project -- Heart Beat's README
+Side-Project -- for fun
